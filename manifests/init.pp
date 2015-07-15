@@ -13,6 +13,10 @@ class n98magerun(
   # Dependencies
   ensure_packages([$curl_package, $php_package])
 
+  # Make sure the dependencies are installed
+  if ! defined (Package['curl']){ package { 'curl': ensure => installed } }
+  if ! defined (Package['php5-cli']){ package { 'php5-cli': ensure => installed } }
+
   if $stable {
     $download_path = 'https://raw.githubusercontent.com/netz98/n98-magerun/master/n98-magerun.phar'
   } else {
